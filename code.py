@@ -114,7 +114,7 @@ class HallucinationDetector:
         return evidence_snippets
 
     # ---------------- STAGE 3 ----------------
-    def stage3_nli_verification(self, claim: str, evidence: List[str]) -> Tuple[str, float, float]: # tf-idf verification
+    def stage3_tfidf_verification(self, claim: str, evidence: List[str]) -> Tuple[str, float, float]: # tf-idf verification
         if not evidence:
             return 'ABSTAINED❌', 0.0, 0.0
 
@@ -210,7 +210,7 @@ class HallucinationDetector:
 
             # ✅ 3. Normal pipeline
             evidence = self.stage2_evidence_retrieval(claim)
-            label, conf, trust = self.stage3_nli_verification(claim, evidence)
+            label, conf, trust = self.stage3_tfidf_verification(claim, evidence)
 
             results.append(VerificationResult(
                 claim=claim,
